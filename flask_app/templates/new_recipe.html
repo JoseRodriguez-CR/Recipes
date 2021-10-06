@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create</title>        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        </head>
+    <body>
+        <div class ="d-flex justify-content-between align-items-center col-10">
+            <h1 class="text-center text-dark">What recipe are you going to add {{user.first_name}}? </h1>
+            <div class="d-flex colc-6 justify-content-around">
+                <a href="/home" class="d-flex justify-content-end mx-3" style="text-decoration:underline ">Home</a>
+                <a href="/logout" class="d-flex justify-content-end" style="text-decoration:underline">Logout</a>
+            </div>
+        </div> 
+        <form action="/create/recipe" method="post" class="mx-auto col-8 p-5 bg-secondary text-light my-5">
+            <h2 class="text-primary text-warning ">Add a New Recipe</h2>
+            {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Before Add a New Recipe You Need to be Logged In!</strong>
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="d-flex justify-content-between col-12">
+                <div class= "col-8">
+                    <div class="form-group ">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id = "description" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions">Instructions:</label>
+                        <textarea name="instructions" id = "instructions" rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="date_made">Date Made On:</label>
+                        <input type="date" name="date_made" id = "date_made" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="under_30_min">Under 30 min?</label>
+                        <div class="input-group-text bg-dark">
+                            <input type="radio" name="under_30_min" value="1" class="form-control" >
+                            <label for="1" class="text-warning">Yes</label>            
+                        </div>
+                        <div class="input-group-text bg-dark">
+                            <input type="radio" name="under_30_min" value="0" class="form-control">
+                            <label for="0" class="text-warning">No</label>
+                        </div>
+                            
+
+                    </div>
+                    <input type="submit" value="Create" class="btn btn-warning text-dark">
+                </div>
+
+            </div>
+
+        </form>
+        
+
+
+
+    </body>
+</html>
